@@ -408,7 +408,11 @@
                             $scrollParent.off('scroll', scrollHandler);
                         });
 
-                        $scope.$on('vsRepeatTrigger', refresh);
+                        $scope.$on('vsRepeatTrigger', function() {
+                            $scope.overrideStartIndex = $scope.$eval($attrs.vsOverrideStartIndex);
+                            $scope.startIndex =  $scope.$eval($attrs.startIndex) || 0;
+                            refresh();
+                        });
 
                         $scope.$on('vsRepeatResize', function() {
                             autoSize = true;
